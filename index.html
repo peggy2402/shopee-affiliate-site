@@ -4,6 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HeroToys - Affiliate Shopee Đồ Chơi Mô Hình</title>
+    
+    <!-- Meta Tags for SEO -->
+    <meta name="description" content="HeroToys - Chuyên cung cấp các mô hình đồ chơi chính hãng từ Gundam, Anime, Genshin Impact đến các mô hình lắp ghép độc đáo.">
+    <meta name="keywords" content="mô hình, đồ chơi, Gundam, Anime, Genshin Impact, LEGO, figure, HeroToys, Shopee affiliate">
+    <meta name="author" content="HeroToys">
+    
+    <!-- Open Graph / Facebook Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://herotoys.example.com/">
+    <meta property="og:title" content="HeroToys - Affiliate Shopee Đồ Chơi Mô Hình">
+    <meta property="og:description" content="Chuyên cung cấp các mô hình đồ chơi chính hãng từ Gundam, Anime, Genshin Impact đến các mô hình lắp ghép độc đáo.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1589256469067-ea99122bbdc4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&h=630&q=80">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="HeroToys - Mô hình đồ chơi chính hãng">
+    
+    <!-- Twitter Meta Tags -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://herotoys.example.com/">
+    <meta property="twitter:title" content="HeroToys - Affiliate Shopee Đồ Chơi Mô Hình">
+    <meta property="twitter:description" content="Chuyên cung cấp các mô hình đồ chơi chính hãng từ Gundam, Anime, Genshin Impact đến các mô hình lắp ghép độc đáo.">
+    <meta property="twitter:image" content="https://images.unsplash.com/photo-1589256469067-ea99122bbdc4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&h=630&q=80">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -379,7 +402,7 @@
             display: flex;
             flex-direction: column;
             height: 100%;
-            min-height: 420px; /* Chiều cao phù hợp với 2 sản phẩm/hàng */
+            min-height: 400px; /* Chiều cao phù hợp với 2 sản phẩm/hàng */
         }
         
         .product-card:hover {
@@ -475,7 +498,7 @@
             letter-spacing: 0.5px;
         }
         
-        /* CẢI THIỆN: Hiển thị tên sản phẩm cho mobile - CÓ THỂ CLICK */
+        /* CẢI THIỆN: Hiển thị tên sản phẩm - CÓ THỂ CLICK TRÊN MOBILE */
         .product-name {
             font-size: 1rem;
             font-weight: 700;
@@ -491,18 +514,31 @@
             cursor: default; /* Mặc định không clickable */
         }
         
-        /* TRÊN MOBILE: Tên sản phẩm có thể click */
+        /* TRÊN MOBILE: Tên sản phẩm có thể click và hiển thị rõ ràng */
         @media (max-width: 768px) {
             .product-name {
                 cursor: pointer;
                 color: #0066cc;
                 text-decoration: none;
                 transition: color 0.2s;
+                position: relative;
+                padding-right: 20px; /* Tạo khoảng trống cho icon mũi tên */
             }
             
             .product-name:hover, .product-name:active {
                 color: #ff6b6b;
                 text-decoration: underline;
+            }
+            
+            /* Thêm icon mũi tên nhỏ để chỉ ra rằng có thể click */
+            .product-name::after {
+                content: " →";
+                font-size: 0.9em;
+                color: #ff6b6b;
+                position: absolute;
+                right: 0;
+                top: 0;
+                opacity: 0.7;
             }
         }
         
@@ -538,6 +574,7 @@
             font-weight: 600;
         }
         
+        /* Nút Mua trên Shopee - ẨN TRÊN MOBILE, HIỆN TRÊN DESKTOP */
         .shopee-btn {
             background-color: #ff6b6b;
             color: white;
@@ -558,6 +595,18 @@
         .shopee-btn:hover {
             background-color: #ee5a52;
             transform: translateY(-2px);
+        }
+        
+        /* Ẩn nút trên mobile */
+        @media (max-width: 768px) {
+            .shopee-btn {
+                display: none;
+            }
+            
+            /* Điều chỉnh lại chiều cao thẻ sản phẩm khi ẩn nút */
+            .product-card {
+                min-height: 360px;
+            }
         }
         
         /* Favorites Section */
@@ -809,7 +858,7 @@
             }
             
             .product-card {
-                min-height: 400px;
+                min-height: 360px;
             }
             
             .footer-content {
@@ -866,6 +915,10 @@
             .product-image {
                 height: 160px;
             }
+            
+            .product-card {
+                min-height: 340px;
+            }
         }
         
         /* Small phones */
@@ -876,7 +929,7 @@
             }
             
             .product-card {
-                min-height: 380px;
+                min-height: 340px;
             }
         }
     </style>
@@ -1520,7 +1573,7 @@
             });
         }
 
-        // Create product card - CẬP NHẬT: Tên sản phẩm có thể click trên mobile
+        // Create product card - CẬP NHẬT: Tên sản phẩm có thể click trên mobile, không có nút
         function createProductCard(product, isFavorite) {
             const card = document.createElement('div');
             card.className = 'product-card';
@@ -1533,6 +1586,9 @@
             // Format prices
             const formattedPrice = formatPrice(product.price);
             const formattedOriginalPrice = product.originalPrice ? formatPrice(product.originalPrice) : '';
+            
+            // Kiểm tra xem có phải mobile không để quyết định có hiển thị nút không
+            const isMobile = window.innerWidth <= 768;
             
             card.innerHTML = `
                 <div class="product-image">
@@ -1553,9 +1609,9 @@
                             ${product.discount > 0 ? `<span class="discount-percent">-${product.discount}%</span>` : ''}
                         </div>
                     </div>
-                    <button class="shopee-btn" onclick="window.open('${product.shopeeLink}', '_blank')">
+                    ${!isMobile ? `<button class="shopee-btn" onclick="window.open('${product.shopeeLink}', '_blank')">
                         <i class="fas fa-shopping-cart"></i> Mua trên Shopee
-                    </button>
+                    </button>` : ''}
                 </div>
             `;
             
@@ -1568,19 +1624,17 @@
             
             // THÊM SỰ KIỆN: Click vào tên sản phẩm trên mobile để mở Shopee
             const productNameElement = card.querySelector('.product-name');
-            const shopeeBtn = card.querySelector('.shopee-btn');
             
-            // Kiểm tra nếu là mobile (màn hình <= 768px)
-            if (window.innerWidth <= 768) {
+            if (isMobile) {
                 // Trên mobile: tên sản phẩm có thể click
                 productNameElement.style.cursor = 'pointer';
+                productNameElement.style.color = '#0066cc';
+                
                 productNameElement.addEventListener('click', function(e) {
                     e.stopPropagation();
                     window.open(product.shopeeLink, '_blank');
                 });
                 
-                // Trên mobile: thay đổi màu tên sản phẩm để thể hiện có thể click
-                productNameElement.style.color = '#0066cc';
                 productNameElement.addEventListener('mouseenter', function() {
                     this.style.textDecoration = 'underline';
                 });
@@ -1588,9 +1642,14 @@
                     this.style.textDecoration = 'none';
                 });
             } else {
-                // Trên desktop: tên sản phẩm không click, giữ nguyên màu
-                productNameElement.style.cursor = 'default';
-                productNameElement.style.color = '#333';
+                // Trên desktop: nếu có nút shopee, thêm sự kiện
+                const shopeeBtn = card.querySelector('.shopee-btn');
+                if (shopeeBtn) {
+                    shopeeBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        window.open(product.shopeeLink, '_blank');
+                    });
+                }
             }
             
             return card;
