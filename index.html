@@ -1,11 +1,1305 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>HeroToys - Affiliate Shopee Đồ Chơi Mô Hình</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo i {
+            font-size: 2.5rem;
+        }
+        
+        .logo h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+        }
+        
+        .logo span {
+            color: #ffde59;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .nav-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn.active {
+            background-color: #ffde59;
+            color: #333;
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 30px 0;
+        }
+        
+        /* Controls */
+        .controls {
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+        
+        .control-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .control-row:last-child {
+            margin-bottom: 0;
+        }
+        
+        .search-box {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 15px 20px 15px 50px;
+            border: 2px solid #eaeaea;
+            border-radius: 30px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .search-box input:focus {
+            border-color: #ff6b6b;
+            outline: none;
+        }
+        
+        .search-box i {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+        }
+        
+        .filter-group, .sort-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .filter-group label, .sort-group label {
+            font-weight: 600;
+            color: #555;
+            white-space: nowrap;
+        }
+        
+        select {
+            padding: 12px 20px;
+            border: 2px solid #eaeaea;
+            border-radius: 8px;
+            background-color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            min-width: 180px;
+        }
+        
+        select:focus {
+            border-color: #ff6b6b;
+            outline: none;
+        }
+        
+        /* Products Header */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            color: #ff6b6b;
+        }
+        
+        .product-count {
+            background-color: #ff6b6b;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .filter-info {
+            background-color: #f0f0f0;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: #666;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        @media (max-width: 1200px) {
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 900px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .product-image {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: #ffde59;
+            color: #333;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+        
+        .favorite-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #ccc;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .favorite-btn:hover {
+            color: #ff6b6b;
+            transform: scale(1.1);
+        }
+        
+        .favorite-btn.active {
+            color: #ff6b6b;
+        }
+        
+        .product-info {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-category {
+            color: #ff6b6b;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .product-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #333;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            min-height: 3.4em;
+        }
+        
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .shopee-btn {
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: auto;
+        }
+        
+        .shopee-btn:hover {
+            background-color: #ee5a52;
+            transform: translateY(-2px);
+        }
+        
+        /* Favorites Section */
+        .favorites-section {
+            display: none;
+        }
+        
+        .empty-favorites {
+            text-align: center;
+            padding: 60px 20px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .empty-favorites i {
+            font-size: 4rem;
+            color: #eaeaea;
+            margin-bottom: 20px;
+        }
+        
+        .empty-favorites h3 {
+            font-size: 1.8rem;
+            color: #888;
+            margin-bottom: 15px;
+        }
+        
+        /* Notification */
+        .notification {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 18px 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 1000;
+            transform: translateX(150%);
+            transition: transform 0.5s ease;
+            max-width: 350px;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification i {
+            font-size: 1.5rem;
+        }
+        
+        .notification.error {
+            background-color: #ff6b6b;
+        }
+        
+        .notification.warning {
+            background-color: #ffa726;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: #ffde59;
+        }
+        
+        .footer-section p {
+            margin-bottom: 15px;
+            color: #ccc;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-section ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section ul li a:hover {
+            color: #ffde59;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Category Counts */
+        .category-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .category-stat {
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 180px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .category-stat:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .category-stat.active {
+            background-color: #ff6b6b;
+            color: white;
+        }
+        
+        .category-stat.active .stat-count {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        
+        .stat-icon {
+            font-size: 1.8rem;
+        }
+        
+        .stat-info {
+            flex-grow: 1;
+        }
+        
+        .stat-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .stat-count {
+            background-color: #f0f0f0;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .nav-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .control-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .filter-group, .sort-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            select {
+                width: 100%;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .category-stats {
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 <body>
-    test
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-robot"></i>
+                    <h1>Hero<span>Toys</span></h1>
+                </div>
+                <div class="nav-buttons">
+                    <button class="nav-btn active" id="products-btn">
+                        <i class="fas fa-box-open"></i> Sản Phẩm <span id="total-products-count">0</span>
+                    </button>
+                    <button class="nav-btn" id="favorites-btn">
+                        <i class="fas fa-heart"></i> Yêu Thích <span id="favorites-count">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container main-content">
+        <!-- Products Section -->
+        <section id="products-section">
+            <div class="controls">
+                <div class="control-row">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="search-input" placeholder="Tìm kiếm mô hình, đồ chơi...">
+                    </div>
+                </div>
+                <div class="control-row">
+                    <div class="filter-group">
+                        <label for="category-filter"><i class="fas fa-filter"></i> Danh mục:</label>
+                        <select id="category-filter">
+                            <option value="all">Tất cả danh mục</option>
+                            <option value="gundam">Gundam</option>
+                            <option value="anime">Anime</option>
+                            <option value="genshin">Genshin Impact</option>
+                            <option value="lego">Mô hình lắp ghép</option>
+                            <option value="figure">Figure</option>
+                        </select>
+                    </div>
+                    <div class="sort-group">
+                        <label for="sort-by"><i class="fas fa-sort"></i> Sắp xếp:</label>
+                        <select id="sort-by">
+                            <option value="default">Mặc định</option>
+                            <option value="price-asc">Giá: Thấp đến Cao</option>
+                            <option value="price-desc">Giá: Cao đến Thấp</option>
+                            <option value="name-asc">Tên: A-Z</option>
+                            <option value="name-desc">Tên: Z-A</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Category Statistics -->
+            <div class="category-stats" id="category-stats">
+                <!-- Category stats will be loaded here by JavaScript -->
+            </div>
+            
+            <!-- Products Header -->
+            <div class="section-header">
+                <h2 class="section-title"><i class="fas fa-cube"></i> Sản Phẩm Nổi Bật</h2>
+                <div class="product-count" id="products-display-count">
+                    <i class="fas fa-cubes"></i> Đang hiển thị: <span id="displayed-count">0</span>/<span id="total-count">0</span>
+                </div>
+            </div>
+            
+            <div id="filter-info" class="filter-info" style="display: none;">
+                <!-- Filter info will be displayed here -->
+            </div>
+            
+            <div class="products-grid" id="products-grid">
+                <!-- Products will be loaded here by JavaScript -->
+            </div>
+        </section>
+        
+        <!-- Favorites Section -->
+        <section id="favorites-section" class="favorites-section">
+            <!-- Favorites Header -->
+            <div class="section-header">
+                <h2 class="section-title"><i class="fas fa-heart"></i> Sản Phẩm Yêu Thích</h2>
+                <div class="product-count" id="favorites-display-count">
+                    <i class="fas fa-heart"></i> Tổng số: <span id="favorites-total-count">0</span>
+                </div>
+            </div>
+            
+            <div class="products-grid" id="favorites-grid">
+                <!-- Favorites will be loaded here by JavaScript -->
+            </div>
+            
+            <div id="empty-favorites" class="empty-favorites" style="display: none;">
+                <i class="fas fa-heart-broken"></i>
+                <h3>Chưa có sản phẩm yêu thích</h3>
+                <p>Hãy thêm sản phẩm yêu thích bằng cách nhấn vào biểu tượng trái tim trên sản phẩm</p>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <div class="notification-content">Sản phẩm đã được thêm vào yêu thích!</div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>HeroToys</h3>
+                    <p>Chuyên cung cấp các mô hình đồ chơi chính hãng từ Gundam, Anime, Genshin Impact đến các mô hình lắp ghép độc đáo.</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Đối tác chính thức của Shopee</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Danh Mục</h3>
+                    <ul>
+                        <li><a href="#" data-category="gundam">Gundam (<span id="cat-gundam">0</span>)</a></li>
+                        <li><a href="#" data-category="anime">Anime Figures (<span id="cat-anime">0</span>)</a></li>
+                        <li><a href="#" data-category="genshin">Genshin Impact (<span id="cat-genshin">0</span>)</a></li>
+                        <li><a href="#" data-category="lego">Mô Hình Lắp Ghép (<span id="cat-lego">0</span>)</a></li>
+                        <li><a href="#" data-category="figure">Đồ Chơi Cao Cấp (<span id="cat-figure">0</span>)</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Liên Hệ</h3>
+                    <p><i class="fas fa-envelope"></i> tranvanchien24022003@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +84 862 587 229</p>
+                    <p><i class="fas fa-clock"></i> 8:00 - 22:00 (T2 - T7)</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 HeroToys. Tất cả các quyền được bảo lưu. | Đây là website affiliate liên kết với Shopee</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Sample product data
+        const products = [
+            {
+                id: 1,
+                name: "Mô Hình Gundam RX-78-2 MG 1/100",
+                category: "gundam",
+                price: 850000,
+                image: "https://images.unsplash.com/photo-1589256469067-ea99122bbdc4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                shopeeLink: "https://shopee.vn",
+                badge: "Mới"
+            },
+            {
+                id: 2,
+                name: "Figure Naruto Uzumaki - Sage Mode Limited Edition",
+                category: "anime",
+                price: 1200000,
+                image: "https://images.unsplash.com/photo-1639322537228-f710d846310a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                shopeeLink: "https://shopee.vn",
+                badge: "Giới hạn"
+            },
+            {
+                id: 3,
+                name: "Mô Hình Klee Genshin Impact - Pop Up Parade",
+                category: "genshin",
+                price: 650000,
+                image: "https://images.unsplash.com/photo-1618331833071-1c0c6ee3d19e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                shopeeLink: "https://shopee.vn",
+                badge: "Bán chạy"
+            },
+            {
+                id: 4,
+                name: "LEGO Star Wars Millennium Falcon 75192",
+                category: "lego",
+                price: 12500000,
+                image: "https://images.unsplash.com/photo-1594787318287-7f6eee8d3c53?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                shopeeLink: "https://shopee.vn",
+                badge: "Cao cấp"
+            },
+            {
+                id: 5,
+                name: "Mô Hình Gundam Wing Zero Custom EW MG",
+                category: "gundam",
+                price: 950000,
+                image: "https://images.unsplash.com/photo-1621252179026-8d6b6d4de7e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                shopeeLink: "https://shopee.vn"
+            },
+            {
+                id: 6,
+                name: "Figure One Piece - Roronoa Zoro Three Sword Style",
+                category: "anime",
+                price: 1100000,
+                image: "https://images.unsplash.com/photo-1639322537502-9e1a6b8b1b2e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                shopeeLink: "https://shopee.vn",
+                badge: "Mới"
+            },
+            {
+                id: 7,
+                name: "Mô Hình Raiden Shogun Genshin Impact - Figma",
+                category: "genshin",
+                price: 850000,
+                image: "https://images.unsplash.com/photo-1618331835717-801e976710b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                shopeeLink: "https://shopee.vn"
+            },
+            {
+                id: 8,
+                name: "LEGO Harry Potter Hogwarts Castle 71043",
+                category: "lego",
+                price: 9500000,
+                image: "https://images.unsplash.com/photo-1587654780298-8c6d6b2c8b2a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                shopeeLink: "https://shopee.vn",
+                badge: "Bán chạy"
+            },
+            {
+                id: 9,
+                name: "Mô Hình Gundam Barbatos Lupus Rex 1/100",
+                category: "gundam",
+                price: 780000,
+                image: "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                shopeeLink: "https://shopee.vn"
+            },
+            {
+                id: 10,
+                name: "Figure Demon Slayer - Kamado Tanjiro Hinokami Kagura",
+                category: "anime",
+                price: 890000,
+                image: "https://images.unsplash.com/photo-1639322537191-2c5c6b5c5b5e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                shopeeLink: "https://shopee.vn",
+                badge: "Mới"
+            },
+            {
+                id: 11,
+                name: "Mô Hình Zhongli Genshin Impact - Scale 1/7",
+                category: "genshin",
+                price: 1450000,
+                image: "https://images.unsplash.com/photo-1618331833142-3c6b6b6b6b6b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                shopeeLink: "https://shopee.vn",
+                badge: "Cao cấp"
+            },
+            {
+                id: 12,
+                name: "LEGO Technic Bugatti Chiron 42083",
+                category: "lego",
+                price: 11500000,
+                image: "https://images.unsplash.com/photo-1587654780298-8c6d6b2c8b2a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                shopeeLink: "https://shopee.vn",
+                badge: "Cao cấp"
+            },
+            {
+                id: 13,
+                name: "Figure Attack on Titan - Levi Ackerman",
+                category: "anime",
+                price: 950000,
+                image: "https://images.unsplash.com/photo-1639322537000-2c5c6b5c5b5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                shopeeLink: "https://shopee.vn"
+            },
+            {
+                id: 14,
+                name: "Mô Hình Gundam Unicorn Perfectibility",
+                category: "gundam",
+                price: 1850000,
+                image: "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                shopeeLink: "https://shopee.vn",
+                badge: "Giới hạn"
+            },
+            {
+                id: 15,
+                name: "Figure Genshin Impact - Hu Tao",
+                category: "genshin",
+                price: 1250000,
+                image: "https://images.unsplash.com/photo-1618331833071-1c0c6ee3d19e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                shopeeLink: "https://shopee.vn"
+            },
+            {
+                id: 16,
+                name: "LEGO Marvel Avengers Helicarrier",
+                category: "lego",
+                price: 7500000,
+                image: "https://images.unsplash.com/photo-1594787318287-7f6eee8d3c53?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                shopeeLink: "https://shopee.vn"
+            }
+        ];
+
+        // DOM Elements
+        const productsGrid = document.getElementById('products-grid');
+        const favoritesGrid = document.getElementById('favorites-grid');
+        const productsSection = document.getElementById('products-section');
+        const favoritesSection = document.getElementById('favorites-section');
+        const productsBtn = document.getElementById('products-btn');
+        const favoritesBtn = document.getElementById('favorites-btn');
+        const favoritesCount = document.getElementById('favorites-count');
+        const totalProductsCount = document.getElementById('total-products-count');
+        const emptyFavorites = document.getElementById('empty-favorites');
+        const searchInput = document.getElementById('search-input');
+        const categoryFilter = document.getElementById('category-filter');
+        const sortBy = document.getElementById('sort-by');
+        const notification = document.getElementById('notification');
+        const displayedCount = document.getElementById('displayed-count');
+        const totalCount = document.getElementById('total-count');
+        const favoritesTotalCount = document.getElementById('favorites-total-count');
+        const categoryStats = document.getElementById('category-stats');
+        const filterInfo = document.getElementById('filter-info');
+
+        // Favorites array (loaded from localStorage)
+        let favorites = JSON.parse(localStorage.getItem('herotoys-favorites')) || [];
+        
+        // Current filtered products
+        let currentFilteredProducts = [];
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Calculate initial counts
+            updateCategoryCounts();
+            updateProductCounts(products.length, products.length);
+            
+            // Display all products initially
+            currentFilteredProducts = [...products];
+            displayProducts(currentFilteredProducts);
+            
+            // Update favorites count
+            updateFavoritesCount();
+            
+            // Load favorites if any
+            if (favorites.length > 0) {
+                displayFavorites();
+            }
+            
+            // Add event listeners to category links in footer
+            setupCategoryLinks();
+        });
+
+        // Display products
+        function displayProducts(productsToDisplay) {
+            productsGrid.innerHTML = '';
+            
+            if (productsToDisplay.length === 0) {
+                productsGrid.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #888;">Không tìm thấy sản phẩm nào.</p>';
+                return;
+            }
+            
+            productsToDisplay.forEach(product => {
+                const isFavorite = favorites.includes(product.id);
+                const productCard = createProductCard(product, isFavorite);
+                productsGrid.appendChild(productCard);
+            });
+        }
+
+        // Display favorites
+        function displayFavorites() {
+            favoritesGrid.innerHTML = '';
+            
+            if (favorites.length === 0) {
+                emptyFavorites.style.display = 'block';
+                favoritesTotalCount.textContent = '0';
+                return;
+            }
+            
+            emptyFavorites.style.display = 'none';
+            
+            const favoriteProducts = products.filter(product => favorites.includes(product.id));
+            favoritesTotalCount.textContent = favoriteProducts.length;
+            
+            favoriteProducts.forEach(product => {
+                const productCard = createProductCard(product, true);
+                favoritesGrid.appendChild(productCard);
+            });
+        }
+
+        // Create product card
+        function createProductCard(product, isFavorite) {
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            card.dataset.id = product.id;
+            card.dataset.category = product.category;
+            card.dataset.price = product.price;
+            card.dataset.name = product.name.toLowerCase();
+            
+            // Format price with dots for thousands
+            const formattedPrice = product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            
+            card.innerHTML = `
+                <div class="product-image">
+                    <img src="${product.image}" alt="${product.name}">
+                    ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
+                    <button class="favorite-btn ${isFavorite ? 'active' : ''}" data-id="${product.id}">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">${getCategoryName(product.category)}</div>
+                    <h3 class="product-name">${product.name}</h3>
+                    <div class="product-price">${formattedPrice}₫</div>
+                    <button class="shopee-btn" onclick="window.open('${product.shopeeLink}', '_blank')">
+                        <i class="fas fa-shopping-cart"></i> Mua trên Shopee
+                    </button>
+                </div>
+            `;
+            
+            // Add event listener to favorite button
+            const favoriteBtn = card.querySelector('.favorite-btn');
+            favoriteBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                toggleFavorite(product.id);
+            });
+            
+            return card;
+        }
+
+        // Get category name
+        function getCategoryName(category) {
+            const categories = {
+                'gundam': 'Gundam',
+                'anime': 'Anime Figure',
+                'genshin': 'Genshin Impact',
+                'lego': 'Mô Hình Lắp Ghép',
+                'figure': 'Figure'
+            };
+            return categories[category] || category;
+        }
+
+        // Get category icon
+        function getCategoryIcon(category) {
+            const icons = {
+                'gundam': 'fas fa-robot',
+                'anime': 'fas fa-user-ninja',
+                'genshin': 'fas fa-magic',
+                'lego': 'fas fa-puzzle-piece',
+                'figure': 'fas fa-user-astronaut'
+            };
+            return icons[category] || 'fas fa-cube';
+        }
+
+        // Toggle favorite
+        function toggleFavorite(productId) {
+            const index = favorites.indexOf(productId);
+            
+            if (index === -1) {
+                // Add to favorites
+                favorites.push(productId);
+                showNotification('Sản phẩm đã được thêm vào yêu thích!', 'success');
+            } else {
+                // Remove from favorites
+                favorites.splice(index, 1);
+                showNotification('Sản phẩm đã được xóa khỏi yêu thích!', 'warning');
+            }
+            
+            // Save to localStorage
+            localStorage.setItem('herotoys-favorites', JSON.stringify(favorites));
+            
+            // Update UI
+            updateFavoritesCount();
+            
+            // Update favorite buttons in products grid
+            const favoriteBtns = document.querySelectorAll(`.favorite-btn[data-id="${productId}"]`);
+            favoriteBtns.forEach(btn => {
+                btn.classList.toggle('active');
+            });
+            
+            // If on favorites page, refresh the display
+            if (favoritesSection.style.display === 'block') {
+                displayFavorites();
+            }
+        }
+
+        // Update favorites count
+        function updateFavoritesCount() {
+            favoritesCount.textContent = favorites.length;
+        }
+
+        // Update product counts
+        function updateProductCounts(displayed, total) {
+            displayedCount.textContent = displayed;
+            totalCount.textContent = total;
+            totalProductsCount.textContent = total;
+        }
+
+        // Update category counts
+        function updateCategoryCounts() {
+            // Calculate counts per category
+            const categoryCounts = {
+                'gundam': 0,
+                'anime': 0,
+                'genshin': 0,
+                'lego': 0,
+                'figure': 0
+            };
+            
+            products.forEach(product => {
+                if (categoryCounts[product.category] !== undefined) {
+                    categoryCounts[product.category]++;
+                }
+            });
+            
+            // Update category stats in footer
+            document.getElementById('cat-gundam').textContent = categoryCounts['gundam'];
+            document.getElementById('cat-anime').textContent = categoryCounts['anime'];
+            document.getElementById('cat-genshin').textContent = categoryCounts['genshin'];
+            document.getElementById('cat-lego').textContent = categoryCounts['lego'];
+            document.getElementById('cat-figure').textContent = categoryCounts['figure'];
+            
+            // Update category stats cards
+            updateCategoryStatsCards(categoryCounts);
+        }
+
+        // Update category stats cards
+        function updateCategoryStatsCards(categoryCounts) {
+            categoryStats.innerHTML = '';
+            
+            // Add "All" category
+            const allCard = document.createElement('div');
+            allCard.className = 'category-stat active';
+            allCard.dataset.category = 'all';
+            allCard.innerHTML = `
+                <div class="stat-icon"><i class="fas fa-cubes"></i></div>
+                <div class="stat-info">
+                    <div class="stat-name">Tất cả</div>
+                </div>
+                <div class="stat-count">${products.length}</div>
+            `;
+            allCard.addEventListener('click', function() {
+                // Remove active class from all category stats
+                document.querySelectorAll('.category-stat').forEach(stat => {
+                    stat.classList.remove('active');
+                });
+                // Add active class to clicked stat
+                this.classList.add('active');
+                
+                // Reset category filter
+                categoryFilter.value = 'all';
+                filterAndSortProducts();
+            });
+            categoryStats.appendChild(allCard);
+            
+            // Add other categories
+            for (const [category, count] of Object.entries(categoryCounts)) {
+                if (count > 0) {
+                    const categoryCard = document.createElement('div');
+                    categoryCard.className = 'category-stat';
+                    categoryCard.dataset.category = category;
+                    categoryCard.innerHTML = `
+                        <div class="stat-icon"><i class="${getCategoryIcon(category)}"></i></div>
+                        <div class="stat-info">
+                            <div class="stat-name">${getCategoryName(category)}</div>
+                        </div>
+                        <div class="stat-count">${count}</div>
+                    `;
+                    categoryCard.addEventListener('click', function() {
+                        // Remove active class from all category stats
+                        document.querySelectorAll('.category-stat').forEach(stat => {
+                            stat.classList.remove('active');
+                        });
+                        // Add active class to clicked stat
+                        this.classList.add('active');
+                        
+                        // Set category filter
+                        categoryFilter.value = category;
+                        filterAndSortProducts();
+                    });
+                    categoryStats.appendChild(categoryCard);
+                }
+            }
+        }
+
+        // Setup category links in footer
+        function setupCategoryLinks() {
+            document.querySelectorAll('.footer-section ul li a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const category = this.dataset.category;
+                    
+                    if (category) {
+                        // Switch to products section
+                        productsBtn.click();
+                        
+                        // Set category filter
+                        categoryFilter.value = category;
+                        
+                        // Update active category stats
+                        document.querySelectorAll('.category-stat').forEach(stat => {
+                            stat.classList.remove('active');
+                            if (stat.dataset.category === category) {
+                                stat.classList.add('active');
+                            }
+                        });
+                        
+                        filterAndSortProducts();
+                    }
+                });
+            });
+        }
+
+        // Show notification
+        function showNotification(message, type = 'success') {
+            const notificationIcon = notification.querySelector('i');
+            const notificationContent = notification.querySelector('.notification-content');
+            
+            // Set notification content
+            notificationContent.textContent = message;
+            
+            // Set icon and color based on type
+            if (type === 'success') {
+                notificationIcon.className = 'fas fa-check-circle';
+                notification.classList.remove('error', 'warning');
+            } else if (type === 'warning') {
+                notificationIcon.className = 'fas fa-exclamation-circle';
+                notification.classList.remove('error');
+                notification.classList.add('warning');
+            } else if (type === 'error') {
+                notificationIcon.className = 'fas fa-times-circle';
+                notification.classList.remove('warning');
+                notification.classList.add('error');
+            }
+            
+            // Show notification
+            notification.classList.add('show');
+            
+            // Hide after 3 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Filter and sort products
+        function filterAndSortProducts() {
+            let filteredProducts = [...products];
+            
+            // Get filter values
+            const searchTerm = searchInput.value.toLowerCase();
+            const category = categoryFilter.value;
+            const sortValue = sortBy.value;
+            
+            // Build filter info text
+            let filterInfoText = '';
+            
+            // Filter by search
+            if (searchTerm) {
+                filteredProducts = filteredProducts.filter(product => 
+                    product.name.toLowerCase().includes(searchTerm)
+                );
+                filterInfoText += `Tìm kiếm: "${searchTerm}"`;
+            }
+            
+            // Filter by category
+            if (category !== 'all') {
+                filteredProducts = filteredProducts.filter(product => 
+                    product.category === category
+                );
+                
+                if (filterInfoText) filterInfoText += ' | ';
+                filterInfoText += `Danh mục: ${getCategoryName(category)}`;
+            }
+            
+            // Sort products
+            let sortText = 'Mặc định';
+            switch(sortValue) {
+                case 'price-asc':
+                    filteredProducts.sort((a, b) => a.price - b.price);
+                    sortText = 'Giá: Thấp đến Cao';
+                    break;
+                case 'price-desc':
+                    filteredProducts.sort((a, b) => b.price - a.price);
+                    sortText = 'Giá: Cao đến Thấp';
+                    break;
+                case 'name-asc':
+                    filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+                    sortText = 'Tên: A-Z';
+                    break;
+                case 'name-desc':
+                    filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
+                    sortText = 'Tên: Z-A';
+                    break;
+                default:
+                    // Default sorting (by ID)
+                    filteredProducts.sort((a, b) => a.id - b.id);
+            }
+            
+            if (filterInfoText) filterInfoText += ' | ';
+            filterInfoText += `Sắp xếp: ${sortText}`;
+            
+            // Update filter info display
+            if (searchTerm || category !== 'all' || sortValue !== 'default') {
+                filterInfo.innerHTML = `<i class="fas fa-info-circle"></i> ${filterInfoText}`;
+                filterInfo.style.display = 'block';
+            } else {
+                filterInfo.style.display = 'none';
+            }
+            
+            // Update current filtered products
+            currentFilteredProducts = filteredProducts;
+            
+            // Update product counts
+            updateProductCounts(filteredProducts.length, products.length);
+            
+            // Display filtered products
+            displayProducts(filteredProducts);
+        }
+
+        // Event listeners for filter and sort
+        searchInput.addEventListener('input', filterAndSortProducts);
+        categoryFilter.addEventListener('change', filterAndSortProducts);
+        sortBy.addEventListener('change', filterAndSortProducts);
+
+        // Navigation between products and favorites
+        productsBtn.addEventListener('click', function() {
+            productsBtn.classList.add('active');
+            favoritesBtn.classList.remove('active');
+            productsSection.style.display = 'block';
+            favoritesSection.style.display = 'none';
+        });
+
+        favoritesBtn.addEventListener('click', function() {
+            favoritesBtn.classList.add('active');
+            productsBtn.classList.remove('active');
+            productsSection.style.display = 'none';
+            favoritesSection.style.display = 'block';
+            displayFavorites();
+        });
+    </script>
 </body>
 </html>
