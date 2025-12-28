@@ -25,15 +25,15 @@
             padding: 0 20px;
         }
         
-        /* Header */
+        /* Header - Tối ưu cho mobile */
         header {
             background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
             color: white;
-            padding: 20px 0;
+            padding: 15px 0;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
         }
         
         .header-content {
@@ -45,15 +45,15 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
         }
         
         .logo i {
-            font-size: 2.5rem;
+            font-size: 2rem;
         }
         
         .logo h1 {
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             font-weight: 800;
         }
         
@@ -63,21 +63,23 @@
         
         .nav-buttons {
             display: flex;
-            gap: 15px;
+            gap: 10px;
         }
         
         .nav-btn {
             background-color: rgba(255, 255, 255, 0.2);
             color: white;
             border: none;
-            padding: 12px 20px;
+            padding: 10px 15px;
             border-radius: 30px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
+            font-size: 0.9rem;
+            white-space: nowrap;
         }
         
         .nav-btn:hover {
@@ -92,24 +94,40 @@
         
         /* Main Content */
         .main-content {
-            padding: 30px 0;
+            padding: 25px 0;
         }
         
-        /* Controls */
+        /* Sticky Controls Container - CỐ ĐỊNH KHI CUỘN */
+        .sticky-controls-wrapper {
+            position: sticky;
+            top: 80px; /* Ngay dưới header */
+            z-index: 999;
+            background-color: #f5f7fa;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .sticky-controls-wrapper {
+                top: 70px; /* Điều chỉnh cho mobile */
+            }
+        }
+        
+        /* Controls - Thiết kế gọn gàng cho mobile */
         .controls {
             background-color: white;
-            padding: 25px;
+            padding: 15px;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            margin-bottom: 30px;
         }
         
         .control-row {
             display: flex;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 10px;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
         
         .control-row:last-child {
@@ -118,16 +136,16 @@
         
         .search-box {
             flex: 1;
-            min-width: 300px;
+            min-width: 100%;
             position: relative;
         }
         
         .search-box input {
             width: 100%;
-            padding: 15px 20px 15px 50px;
+            padding: 12px 15px 12px 45px;
             border: 2px solid #eaeaea;
             border-radius: 30px;
-            font-size: 1rem;
+            font-size: 0.95rem;
             transition: all 0.3s;
         }
         
@@ -138,32 +156,140 @@
         
         .search-box i {
             position: absolute;
-            left: 20px;
+            left: 15px;
             top: 50%;
             transform: translateY(-50%);
             color: #888;
         }
         
+        /* Mobile Filter Toggle - Nút mở bộ lọc trên mobile */
+        .mobile-filter-toggle {
+            display: none;
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        
+        .mobile-filter-toggle:hover {
+            background-color: #ee5a52;
+        }
+        
+        .filter-sort-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        /* Autocomplete Dropdown */
+        .autocomplete-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: white;
+            border: 2px solid #ff6b6b;
+            border-top: none;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            z-index: 200;
+            max-height: 350px;
+            overflow-y: auto;
+            display: none;
+        }
+        
+        .autocomplete-item {
+            padding: 12px 15px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .autocomplete-item:hover {
+            background-color: #fff5f5;
+        }
+        
+        .autocomplete-item:last-child {
+            border-bottom: none;
+        }
+        
+        .autocomplete-item.active {
+            background-color: #fff5f5;
+        }
+        
+        .autocomplete-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .autocomplete-details {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        .autocomplete-category {
+            background-color: #f0f0f0;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+        }
+        
+        .autocomplete-price {
+            color: #ff6b6b;
+            font-weight: 700;
+        }
+        
+        .autocomplete-highlight {
+            background-color: #ffde59;
+            padding: 0 2px;
+            border-radius: 3px;
+            font-weight: 700;
+        }
+        
+        /* Filter và Sort nhóm - Thiết kế gọn hơn cho mobile */
         .filter-group, .sort-group {
             display: flex;
-            align-items: center;
-            gap: 10px;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 5px;
+            width: 100%;
+            flex: 1;
+            min-width: 150px;
         }
         
         .filter-group label, .sort-group label {
             font-weight: 600;
             color: #555;
             white-space: nowrap;
+            font-size: 0.9rem;
         }
         
         select {
-            padding: 12px 20px;
+            padding: 10px 12px;
             border: 2px solid #eaeaea;
             border-radius: 8px;
             background-color: white;
-            font-size: 1rem;
+            font-size: 0.9rem;
             cursor: pointer;
-            min-width: 180px;
+            width: 100%;
+            height: 42px;
         }
         
         select:focus {
@@ -176,17 +302,17 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
             gap: 15px;
         }
         
         .section-title {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             color: #333;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
         
         .section-title i {
@@ -196,30 +322,30 @@
         .product-count {
             background-color: #ff6b6b;
             color: white;
-            padding: 8px 16px;
+            padding: 6px 12px;
             border-radius: 20px;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
         
         .filter-info {
             background-color: #f0f0f0;
-            padding: 10px 20px;
+            padding: 8px 12px;
             border-radius: 8px;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             color: #666;
             width: 100%;
-            margin-top: 10px;
+            margin-top: 8px;
         }
         
-        /* Products Grid */
+        /* Products Grid - LUÔN 2 SẢN PHẨM/HÀNG TRÊN MOBILE */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 25px;
+            gap: 20px;
             margin-bottom: 40px;
         }
         
@@ -231,34 +357,38 @@
         
         @media (max-width: 900px) {
             .products-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(2, 1fr); /* 2 sản phẩm/hàng trên tablet */
+                gap: 15px;
             }
         }
         
         @media (max-width: 600px) {
             .products-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr); /* LUÔN 2 sản phẩm/hàng trên mobile */
+                gap: 12px;
             }
         }
         
+        /* Product Card - Tối ưu cho 2 sản phẩm/hàng */
         .product-card {
             background-color: white;
-            border-radius: 12px;
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
             height: 100%;
+            min-height: 420px; /* Chiều cao phù hợp với 2 sản phẩm/hàng */
         }
         
         .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
         }
         
         .product-image {
-            height: 220px;
+            height: 180px; /* Chiều cao giảm cho mobile */
             overflow: hidden;
             position: relative;
         }
@@ -276,33 +406,48 @@
         
         .product-badge {
             position: absolute;
-            top: 15px;
-            left: 15px;
+            top: 10px;
+            left: 10px;
             background-color: #ffde59;
             color: #333;
-            padding: 5px 12px;
+            padding: 4px 8px;
             border-radius: 4px;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             font-weight: 700;
+            z-index: 2;
+        }
+        
+        .discount-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ff6b6b;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            z-index: 2;
         }
         
         .favorite-btn {
             position: absolute;
-            top: 15px;
-            right: 15px;
+            bottom: 10px;
+            right: 10px;
             background-color: white;
             border: none;
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             color: #ccc;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             transition: all 0.3s;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            z-index: 2;
         }
         
         .favorite-btn:hover {
@@ -315,7 +460,7 @@
         }
         
         .product-info {
-            padding: 20px;
+            padding: 15px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
@@ -323,47 +468,90 @@
         
         .product-category {
             color: #ff6b6b;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
         
+        /* CẢI THIỆN: Hiển thị tên sản phẩm cho mobile - CÓ THỂ CLICK */
         .product-name {
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: 700;
             margin-bottom: 10px;
             color: #333;
-            line-height: 1.4;
+            line-height: 1.3;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            min-height: 3.4em;
+            min-height: 2.6em;
+            flex-shrink: 0;
+            cursor: default; /* Mặc định không clickable */
         }
         
-        .product-price {
-            font-size: 1.5rem;
+        /* TRÊN MOBILE: Tên sản phẩm có thể click */
+        @media (max-width: 768px) {
+            .product-name {
+                cursor: pointer;
+                color: #0066cc;
+                text-decoration: none;
+                transition: color 0.2s;
+            }
+            
+            .product-name:hover, .product-name:active {
+                color: #ff6b6b;
+                text-decoration: underline;
+            }
+        }
+        
+        /* Hiển thị giá */
+        .price-container {
+            margin-bottom: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .original-price {
+            font-size: 0.85rem;
+            color: #888;
+            text-decoration: line-through;
+        }
+        
+        .current-price {
+            font-size: 1.3rem;
             font-weight: 800;
-            color: #333;
-            margin-bottom: 15px;
+            color: #ff6b6b;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .discount-percent {
+            background-color: #ff6b6b;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
         }
         
         .shopee-btn {
             background-color: #ff6b6b;
             color: white;
             border: none;
-            padding: 14px;
+            padding: 12px;
             border-radius: 8px;
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 0.9rem;
             cursor: pointer;
             transition: all 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             margin-top: auto;
         }
         
@@ -379,41 +567,41 @@
         
         .empty-favorites {
             text-align: center;
-            padding: 60px 20px;
+            padding: 50px 20px;
             background-color: white;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
         }
         
         .empty-favorites i {
-            font-size: 4rem;
+            font-size: 3.5rem;
             color: #eaeaea;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         
         .empty-favorites h3 {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             color: #888;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
         
         /* Notification */
         .notification {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
+            bottom: 20px;
+            right: 20px;
             background-color: #4CAF50;
             color: white;
-            padding: 18px 25px;
+            padding: 12px 18px;
             border-radius: 8px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             z-index: 1000;
             transform: translateX(150%);
             transition: transform 0.5s ease;
-            max-width: 350px;
+            max-width: 280px;
         }
         
         .notification.show {
@@ -421,7 +609,7 @@
         }
         
         .notification i {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
         }
         
         .notification.error {
@@ -436,32 +624,33 @@
         footer {
             background-color: #333;
             color: white;
-            padding: 40px 0 20px;
-            margin-top: 50px;
+            padding: 25px 0 15px;
+            margin-top: 30px;
         }
         
         .footer-content {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
-            gap: 40px;
-            margin-bottom: 30px;
+            gap: 25px;
+            margin-bottom: 15px;
         }
         
         .footer-section {
             flex: 1;
-            min-width: 250px;
+            min-width: 200px;
         }
         
         .footer-section h3 {
-            font-size: 1.4rem;
-            margin-bottom: 20px;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
             color: #ffde59;
         }
         
         .footer-section p {
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             color: #ccc;
+            font-size: 0.85rem;
         }
         
         .footer-section ul {
@@ -469,13 +658,14 @@
         }
         
         .footer-section ul li {
-            margin-bottom: 10px;
+            margin-bottom: 6px;
         }
         
         .footer-section ul li a {
             color: #ccc;
             text-decoration: none;
             transition: color 0.3s;
+            font-size: 0.85rem;
         }
         
         .footer-section ul li a:hover {
@@ -484,36 +674,38 @@
         
         .copyright {
             text-align: center;
-            padding-top: 20px;
+            padding-top: 15px;
             border-top: 1px solid #444;
             color: #aaa;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
         }
         
-        /* Category Counts */
+        /* Category Counts - Ẩn trên mobile để tiết kiệm không gian */
         .category-stats {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 25px;
+            gap: 10px;
+            margin-bottom: 15px;
+            justify-content: center;
         }
         
         .category-stat {
             background-color: white;
-            border-radius: 10px;
-            padding: 15px 20px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            padding: 10px 12px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
             display: flex;
             align-items: center;
-            gap: 10px;
-            min-width: 180px;
+            gap: 8px;
+            min-width: 140px;
             transition: all 0.3s;
             cursor: pointer;
+            flex: 1;
         }
         
         .category-stat:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
         }
         
         .category-stat.active {
@@ -527,7 +719,7 @@
         }
         
         .stat-icon {
-            font-size: 1.8rem;
+            font-size: 1.3rem;
         }
         
         .stat-info {
@@ -535,28 +727,56 @@
         }
         
         .stat-name {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: 600;
         }
         
         .stat-count {
             background-color: #f0f0f0;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.85rem;
+            padding: 3px 6px;
+            border-radius: 15px;
+            font-size: 0.75rem;
             font-weight: 700;
         }
         
-        /* Responsive */
+        /* Responsive - Tối ưu mobile */
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
-                gap: 20px;
+                gap: 12px;
+            }
+            
+            .logo {
+                justify-content: center;
+                width: 100%;
             }
             
             .nav-buttons {
                 width: 100%;
+                justify-content: space-between;
+            }
+            
+            .nav-btn {
+                flex: 1;
                 justify-content: center;
+                padding: 10px;
+                font-size: 0.85rem;
+            }
+            
+            /* Hiển thị nút mở bộ lọc trên mobile */
+            .mobile-filter-toggle {
+                display: flex;
+            }
+            
+            /* Ẩn bộ lọc mặc định trên mobile */
+            .filter-sort-container {
+                display: none;
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .filter-sort-container.show {
+                display: flex;
             }
             
             .control-row {
@@ -578,8 +798,85 @@
                 align-items: flex-start;
             }
             
+            /* Ẩn category stats trên mobile để tiết kiệm không gian */
             .category-stats {
-                justify-content: center;
+                display: none;
+            }
+            
+            .product-name {
+                -webkit-line-clamp: 2;
+                min-height: 2.6em;
+            }
+            
+            .product-card {
+                min-height: 400px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .notification {
+                bottom: 15px;
+                right: 15px;
+                left: 15px;
+                max-width: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 12px;
+            }
+            
+            .logo h1 {
+                font-size: 1.5rem;
+            }
+            
+            .logo i {
+                font-size: 1.6rem;
+            }
+            
+            .nav-btn {
+                font-size: 0.8rem;
+                padding: 8px;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .category-stat {
+                min-width: 100%;
+            }
+            
+            .current-price {
+                font-size: 1.2rem;
+            }
+            
+            .original-price {
+                font-size: 0.8rem;
+            }
+            
+            .products-grid {
+                gap: 10px;
+            }
+            
+            .product-image {
+                height: 160px;
+            }
+        }
+        
+        /* Small phones */
+        @media (max-width: 360px) {
+            .products-grid {
+                grid-template-columns: 1fr; /* Trên màn hình rất nhỏ, chuyển về 1 cột */
+                gap: 15px;
+            }
+            
+            .product-card {
+                min-height: 380px;
             }
         }
     </style>
@@ -609,39 +906,56 @@
     <div class="container main-content">
         <!-- Products Section -->
         <section id="products-section">
-            <div class="controls">
-                <div class="control-row">
-                    <div class="search-box">
-                        <i class="fas fa-search"></i>
-                        <input type="text" id="search-input" placeholder="Tìm kiếm mô hình, đồ chơi...">
+            <!-- STICKY CONTROLS WRAPPER - Luôn hiển thị khi cuộn -->
+            <div class="sticky-controls-wrapper">
+                <div class="controls">
+                    <!-- Nút mở bộ lọc trên mobile -->
+                    <button class="mobile-filter-toggle" id="mobile-filter-toggle">
+                        <i class="fas fa-sliders-h"></i> Bộ Lọc & Sắp Xếp
+                    </button>
+                    
+                    <div class="control-row">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="search-input" placeholder="Tìm kiếm mô hình, đồ chơi...">
+                            <!-- Autocomplete Dropdown -->
+                            <div class="autocomplete-dropdown" id="autocomplete-dropdown">
+                                <!-- Autocomplete items will be inserted here by JavaScript -->
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="control-row">
-                    <div class="filter-group">
-                        <label for="category-filter"><i class="fas fa-filter"></i> Danh mục:</label>
-                        <select id="category-filter">
-                            <option value="all">Tất cả danh mục</option>
-                            <option value="gundam">Gundam</option>
-                            <option value="anime">Anime</option>
-                            <option value="genshin">Genshin Impact</option>
-                            <option value="lego">Mô hình lắp ghép</option>
-                            <option value="figure">Figure</option>
-                        </select>
-                    </div>
-                    <div class="sort-group">
-                        <label for="sort-by"><i class="fas fa-sort"></i> Sắp xếp:</label>
-                        <select id="sort-by">
-                            <option value="default">Mặc định</option>
-                            <option value="price-asc">Giá: Thấp đến Cao</option>
-                            <option value="price-desc">Giá: Cao đến Thấp</option>
-                            <option value="name-asc">Tên: A-Z</option>
-                            <option value="name-desc">Tên: Z-A</option>
-                        </select>
+                    
+                    <!-- Container cho bộ lọc và sắp xếp -->
+                    <div class="filter-sort-container" id="filter-sort-container">
+                        <div class="control-row">
+                            <div class="filter-group">
+                                <label for="category-filter"><i class="fas fa-filter"></i> Danh mục:</label>
+                                <select id="category-filter">
+                                    <option value="all">Tất cả danh mục</option>
+                                    <option value="gundam">Gundam</option>
+                                    <option value="anime">Anime</option>
+                                    <option value="genshin">Genshin Impact</option>
+                                    <option value="lego">Mô hình lắp ghép</option>
+                                    <option value="figure">Figure</option>
+                                </select>
+                            </div>
+                            <div class="sort-group">
+                                <label for="sort-by"><i class="fas fa-sort"></i> Sắp xếp:</label>
+                                <select id="sort-by">
+                                    <option value="default">Mặc định</option>
+                                    <option value="price-asc">Giá: Thấp đến Cao</option>
+                                    <option value="price-desc">Giá: Cao đến Thấp</option>
+                                    <option value="name-asc">Tên: A-Z</option>
+                                    <option value="name-desc">Tên: Z-A</option>
+                                    <option value="discount-desc">Giảm giá nhiều nhất</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Category Statistics -->
+            <!-- Category Statistics - Ẩn trên mobile -->
             <div class="category-stats" id="category-stats">
                 <!-- Category stats will be loaded here by JavaScript -->
             </div>
@@ -724,13 +1038,15 @@
     </footer>
     
     <script>
-        // Sample product data
+        // Sample product data - CẬP NHẬT: Thêm originalPrice và discount
         const products = [
             {
                 id: 1,
                 name: "Mô Hình Gundam RX-78-2 MG 1/100",
                 category: "gundam",
                 price: 850000,
+                originalPrice: 1000000,
+                discount: 15,
                 image: "https://images.unsplash.com/photo-1589256469067-ea99122bbdc4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
                 shopeeLink: "https://shopee.vn",
                 badge: "Mới"
@@ -740,6 +1056,8 @@
                 name: "Figure Naruto Uzumaki - Sage Mode Limited Edition",
                 category: "anime",
                 price: 1200000,
+                originalPrice: 1500000,
+                discount: 20,
                 image: "https://images.unsplash.com/photo-1639322537228-f710d846310a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
                 shopeeLink: "https://shopee.vn",
                 badge: "Giới hạn"
@@ -749,120 +1067,107 @@
                 name: "Mô Hình Klee Genshin Impact - Pop Up Parade",
                 category: "genshin",
                 price: 650000,
+                originalPrice: 800000,
+                discount: 19,
                 image: "https://images.unsplash.com/photo-1618331833071-1c0c6ee3d19e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
                 shopeeLink: "https://shopee.vn",
                 badge: "Bán chạy"
             },
             {
                 id: 4,
-                name: "LEGO Star Wars Millennium Falcon 75192",
+                name: "LEGO Star Wars Millennium Falcon 75192 - Bộ Siêu Cao Cấp",
                 category: "lego",
                 price: 12500000,
+                originalPrice: 15000000,
+                discount: 17,
                 image: "https://images.unsplash.com/photo-1594787318287-7f6eee8d3c53?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
                 shopeeLink: "https://shopee.vn",
                 badge: "Cao cấp"
             },
             {
                 id: 5,
-                name: "Mô Hình Gundam Wing Zero Custom EW MG",
+                name: "Mô Hình Gundam Wing Zero Custom EW MG Phiên Bản Đặc Biệt",
                 category: "gundam",
                 price: 950000,
+                originalPrice: 1100000,
+                discount: 14,
                 image: "https://images.unsplash.com/photo-1621252179026-8d6b6d4de7e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
                 shopeeLink: "https://shopee.vn"
             },
             {
                 id: 6,
-                name: "Figure One Piece - Roronoa Zoro Three Sword Style",
+                name: "Figure One Piece - Roronoa Zoro Three Sword Style Limited Edition 2025",
                 category: "anime",
                 price: 1100000,
+                originalPrice: 1300000,
+                discount: 15,
                 image: "https://images.unsplash.com/photo-1639322537502-9e1a6b8b1b2e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
                 shopeeLink: "https://shopee.vn",
                 badge: "Mới"
             },
             {
                 id: 7,
-                name: "Mô Hình Raiden Shogun Genshin Impact - Figma",
+                name: "Mô Hình Raiden Shogun Genshin Impact - Figma Cao Cấp",
                 category: "genshin",
                 price: 850000,
+                originalPrice: 850000,
+                discount: 0,
                 image: "https://images.unsplash.com/photo-1618331835717-801e976710b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
                 shopeeLink: "https://shopee.vn"
             },
             {
                 id: 8,
-                name: "LEGO Harry Potter Hogwarts Castle 71043",
+                name: "LEGO Harry Potter Hogwarts Castle 71043 - Bộ Siêu Cao Cấp",
                 category: "lego",
                 price: 9500000,
+                originalPrice: 12000000,
+                discount: 21,
                 image: "https://images.unsplash.com/photo-1587654780298-8c6d6b2c8b2a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
                 shopeeLink: "https://shopee.vn",
                 badge: "Bán chạy"
             },
             {
                 id: 9,
-                name: "Mô Hình Gundam Barbatos Lupus Rex 1/100",
+                name: "Mô Hình Gundam Barbatos Lupus Rex 1/100 Phiên Bản Đặc Biệt",
                 category: "gundam",
                 price: 780000,
+                originalPrice: 900000,
+                discount: 13,
                 image: "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
                 shopeeLink: "https://shopee.vn"
             },
             {
                 id: 10,
-                name: "Figure Demon Slayer - Kamado Tanjiro Hinokami Kagura",
+                name: "Figure Demon Slayer - Kamado Tanjiro Hinokami Kagura Phiên Bản Cao Cấp",
                 category: "anime",
                 price: 890000,
+                originalPrice: 1100000,
+                discount: 19,
                 image: "https://images.unsplash.com/photo-1639322537191-2c5c6b5c5b5e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
                 shopeeLink: "https://shopee.vn",
                 badge: "Mới"
             },
             {
                 id: 11,
-                name: "Mô Hình Zhongli Genshin Impact - Scale 1/7",
+                name: "Mô Hình Zhongli Genshin Impact - Scale 1/7 Cao Cấp",
                 category: "genshin",
                 price: 1450000,
+                originalPrice: 1800000,
+                discount: 19,
                 image: "https://images.unsplash.com/photo-1618331833142-3c6b6b6b6b6b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
                 shopeeLink: "https://shopee.vn",
                 badge: "Cao cấp"
             },
             {
                 id: 12,
-                name: "LEGO Technic Bugatti Chiron 42083",
+                name: "LEGO Technic Bugatti Chiron 42083 - Bộ Siêu Cao Cấp",
                 category: "lego",
                 price: 11500000,
+                originalPrice: 14000000,
+                discount: 18,
                 image: "https://images.unsplash.com/photo-1587654780298-8c6d6b2c8b2a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
                 shopeeLink: "https://shopee.vn",
                 badge: "Cao cấp"
-            },
-            {
-                id: 13,
-                name: "Figure Attack on Titan - Levi Ackerman",
-                category: "anime",
-                price: 950000,
-                image: "https://images.unsplash.com/photo-1639322537000-2c5c6b5c5b5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
-                shopeeLink: "https://shopee.vn"
-            },
-            {
-                id: 14,
-                name: "Mô Hình Gundam Unicorn Perfectibility",
-                category: "gundam",
-                price: 1850000,
-                image: "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
-                shopeeLink: "https://shopee.vn",
-                badge: "Giới hạn"
-            },
-            {
-                id: 15,
-                name: "Figure Genshin Impact - Hu Tao",
-                category: "genshin",
-                price: 1250000,
-                image: "https://images.unsplash.com/photo-1618331833071-1c0c6ee3d19e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
-                shopeeLink: "https://shopee.vn"
-            },
-            {
-                id: 16,
-                name: "LEGO Marvel Avengers Helicarrier",
-                category: "lego",
-                price: 7500000,
-                image: "https://images.unsplash.com/photo-1594787318287-7f6eee8d3c53?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
-                shopeeLink: "https://shopee.vn"
             }
         ];
 
@@ -885,12 +1190,22 @@
         const favoritesTotalCount = document.getElementById('favorites-total-count');
         const categoryStats = document.getElementById('category-stats');
         const filterInfo = document.getElementById('filter-info');
+        const autocompleteDropdown = document.getElementById('autocomplete-dropdown');
+        const mobileFilterToggle = document.getElementById('mobile-filter-toggle');
+        const filterSortContainer = document.getElementById('filter-sort-container');
 
         // Favorites array (loaded from localStorage)
         let favorites = JSON.parse(localStorage.getItem('herotoys-favorites')) || [];
         
         // Current filtered products
         let currentFilteredProducts = [];
+        
+        // Autocomplete state
+        let autocompleteItems = [];
+        let selectedAutocompleteIndex = -1;
+        
+        // Mobile filter state
+        let isMobileFiltersOpen = false;
 
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
@@ -912,7 +1227,261 @@
             
             // Add event listeners to category links in footer
             setupCategoryLinks();
+            
+            // Setup autocomplete
+            setupAutocomplete();
+            
+            // Setup mobile filter toggle
+            setupMobileFilterToggle();
+            
+            // Kiểm tra kích thước màn hình và điều chỉnh hiển thị filters
+            checkScreenSize();
+            window.addEventListener('resize', checkScreenSize);
         });
+
+        // Kiểm tra kích thước màn hình
+        function checkScreenSize() {
+            const isMobile = window.innerWidth <= 768;
+            
+            if (!isMobile) {
+                // Trên desktop, luôn hiển thị bộ lọc
+                filterSortContainer.style.display = 'flex';
+                mobileFilterToggle.style.display = 'none';
+                isMobileFiltersOpen = false;
+            } else {
+                // Trên mobile, ẩn bộ lọc mặc định (trừ khi đã mở)
+                mobileFilterToggle.style.display = 'flex';
+                if (!isMobileFiltersOpen) {
+                    filterSortContainer.style.display = 'none';
+                }
+            }
+        }
+
+        // Thiết lập nút mở bộ lọc trên mobile
+        function setupMobileFilterToggle() {
+            mobileFilterToggle.addEventListener('click', function() {
+                isMobileFiltersOpen = !isMobileFiltersOpen;
+                
+                if (isMobileFiltersOpen) {
+                    filterSortContainer.style.display = 'flex';
+                    mobileFilterToggle.innerHTML = '<i class="fas fa-times"></i> Đóng Bộ Lọc';
+                } else {
+                    filterSortContainer.style.display = 'none';
+                    mobileFilterToggle.innerHTML = '<i class="fas fa-sliders-h"></i> Bộ Lọc & Sắp Xếp';
+                }
+            });
+        }
+
+        // Setup autocomplete functionality
+        function setupAutocomplete() {
+            // Show autocomplete on input
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.trim().toLowerCase();
+                
+                if (searchTerm.length === 0) {
+                    hideAutocomplete();
+                    return;
+                }
+                
+                // Find matching products
+                const matches = findAutocompleteMatches(searchTerm);
+                autocompleteItems = matches;
+                
+                if (matches.length > 0) {
+                    displayAutocomplete(matches, searchTerm);
+                    selectedAutocompleteIndex = -1;
+                } else {
+                    hideAutocomplete();
+                }
+            });
+            
+            // Handle keyboard navigation in autocomplete
+            searchInput.addEventListener('keydown', function(e) {
+                if (!autocompleteDropdown.style.display || autocompleteDropdown.style.display === 'none') {
+                    return;
+                }
+                
+                // Arrow down
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    selectedAutocompleteIndex = Math.min(selectedAutocompleteIndex + 1, autocompleteItems.length - 1);
+                    updateAutocompleteSelection();
+                }
+                
+                // Arrow up
+                else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    selectedAutocompleteIndex = Math.max(selectedAutocompleteIndex - 1, -1);
+                    updateAutocompleteSelection();
+                }
+                
+                // Enter key
+                else if (e.key === 'Enter' && selectedAutocompleteIndex >= 0) {
+                    e.preventDefault();
+                    selectAutocompleteItem(autocompleteItems[selectedAutocompleteIndex]);
+                }
+                
+                // Escape key
+                else if (e.key === 'Escape') {
+                    hideAutocomplete();
+                }
+            });
+            
+            // Hide autocomplete when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!searchInput.contains(e.target) && !autocompleteDropdown.contains(e.target)) {
+                    hideAutocomplete();
+                }
+            });
+        }
+
+        // Find autocomplete matches
+        function findAutocompleteMatches(searchTerm) {
+            const matches = [];
+            
+            // Search in product names
+            for (const product of products) {
+                const productName = product.name.toLowerCase();
+                
+                // Check if product name contains search term
+                if (productName.includes(searchTerm)) {
+                    // Calculate match score (simple scoring based on position)
+                    let score = 0;
+                    const index = productName.indexOf(searchTerm);
+                    
+                    // Exact match at start gets highest score
+                    if (index === 0) {
+                        score = 100;
+                    } else {
+                        // Match in middle gets lower score
+                        score = 50;
+                    }
+                    
+                    // Add bonus for products with discount
+                    if (product.discount > 0) {
+                        score += 10;
+                    }
+                    
+                    matches.push({
+                        product: product,
+                        score: score,
+                        matchIndex: index
+                    });
+                }
+            }
+            
+            // Sort by score (highest first)
+            matches.sort((a, b) => b.score - a.score);
+            
+            // Return only the top 5 matches
+            return matches.slice(0, 5).map(match => match.product);
+        }
+
+        // Display autocomplete dropdown
+        function displayAutocomplete(matches, searchTerm) {
+            autocompleteDropdown.innerHTML = '';
+            
+            matches.forEach((product, index) => {
+                const item = document.createElement('div');
+                item.className = 'autocomplete-item';
+                item.dataset.index = index;
+                
+                // Format price
+                const formattedPrice = formatPrice(product.price);
+                const formattedOriginalPrice = product.originalPrice ? formatPrice(product.originalPrice) : '';
+                
+                // Highlight search term in product name
+                const productName = product.name;
+                const searchTermLower = searchTerm.toLowerCase();
+                const productNameLower = productName.toLowerCase();
+                const matchIndex = productNameLower.indexOf(searchTermLower);
+                
+                let highlightedName = productName;
+                if (matchIndex !== -1) {
+                    const beforeMatch = productName.substring(0, matchIndex);
+                    const matchText = productName.substring(matchIndex, matchIndex + searchTerm.length);
+                    const afterMatch = productName.substring(matchIndex + searchTerm.length);
+                    
+                    highlightedName = `${beforeMatch}<span class="autocomplete-highlight">${matchText}</span>${afterMatch}`;
+                }
+                
+                // Build price display
+                let priceDisplay = formattedPrice + '₫';
+                if (product.discount > 0) {
+                    priceDisplay = `<span style="color: #ff6b6b; font-weight: 700;">${formattedPrice}₫</span> <span style="color: #888; text-decoration: line-through; font-size: 0.85em;">${formattedOriginalPrice}₫</span> <span style="background-color: #ff6b6b; color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.75em;">-${product.discount}%</span>`;
+                }
+                
+                item.innerHTML = `
+                    <div class="autocomplete-name">${highlightedName}</div>
+                    <div class="autocomplete-details">
+                        <div class="autocomplete-category">${getCategoryName(product.category)}</div>
+                        <div class="autocomplete-price">${priceDisplay}</div>
+                    </div>
+                `;
+                
+                // Add click event
+                item.addEventListener('click', function() {
+                    selectAutocompleteItem(product);
+                });
+                
+                // Add hover events
+                item.addEventListener('mouseenter', function() {
+                    selectedAutocompleteIndex = index;
+                    updateAutocompleteSelection();
+                });
+                
+                autocompleteDropdown.appendChild(item);
+            });
+            
+            // Show dropdown
+            autocompleteDropdown.style.display = 'block';
+        }
+
+        // Update autocomplete selection
+        function updateAutocompleteSelection() {
+            // Remove active class from all items
+            const items = autocompleteDropdown.querySelectorAll('.autocomplete-item');
+            items.forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Add active class to selected item
+            if (selectedAutocompleteIndex >= 0 && selectedAutocompleteIndex < items.length) {
+                items[selectedAutocompleteIndex].classList.add('active');
+                
+                // Scroll into view if needed
+                items[selectedAutocompleteIndex].scrollIntoView({
+                    block: 'nearest',
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Select autocomplete item
+        function selectAutocompleteItem(product) {
+            // Fill search input with product name
+            searchInput.value = product.name;
+            
+            // Trigger search
+            filterAndSortProducts();
+            
+            // Hide autocomplete
+            hideAutocomplete();
+            
+            // Focus on search input
+            searchInput.focus();
+        }
+
+        // Hide autocomplete dropdown
+        function hideAutocomplete() {
+            autocompleteDropdown.style.display = 'none';
+            selectedAutocompleteIndex = -1;
+        }
+
+        // Format price with dots
+        function formatPrice(price) {
+            return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
 
         // Display products
         function displayProducts(productsToDisplay) {
@@ -951,7 +1520,7 @@
             });
         }
 
-        // Create product card
+        // Create product card - CẬP NHẬT: Tên sản phẩm có thể click trên mobile
         function createProductCard(product, isFavorite) {
             const card = document.createElement('div');
             card.className = 'product-card';
@@ -959,14 +1528,17 @@
             card.dataset.category = product.category;
             card.dataset.price = product.price;
             card.dataset.name = product.name.toLowerCase();
+            card.dataset.discount = product.discount || 0;
             
-            // Format price with dots for thousands
-            const formattedPrice = product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            // Format prices
+            const formattedPrice = formatPrice(product.price);
+            const formattedOriginalPrice = product.originalPrice ? formatPrice(product.originalPrice) : '';
             
             card.innerHTML = `
                 <div class="product-image">
-                    <img src="${product.image}" alt="${product.name}">
-                    ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
+                    <img src="${product.image}" alt="${product.name}" loading="lazy">
+                    ${product.discount > 0 ? `<div class="discount-badge">-${product.discount}%</div>` : ''}
+                    ${product.badge && product.discount === 0 ? `<div class="product-badge">${product.badge}</div>` : ''}
                     <button class="favorite-btn ${isFavorite ? 'active' : ''}" data-id="${product.id}">
                         <i class="fas fa-heart"></i>
                     </button>
@@ -974,7 +1546,13 @@
                 <div class="product-info">
                     <div class="product-category">${getCategoryName(product.category)}</div>
                     <h3 class="product-name">${product.name}</h3>
-                    <div class="product-price">${formattedPrice}₫</div>
+                    <div class="price-container">
+                        ${product.discount > 0 ? `<div class="original-price">${formattedOriginalPrice}₫</div>` : ''}
+                        <div class="current-price">
+                            ${formattedPrice}₫
+                            ${product.discount > 0 ? `<span class="discount-percent">-${product.discount}%</span>` : ''}
+                        </div>
+                    </div>
                     <button class="shopee-btn" onclick="window.open('${product.shopeeLink}', '_blank')">
                         <i class="fas fa-shopping-cart"></i> Mua trên Shopee
                     </button>
@@ -987,6 +1565,33 @@
                 e.stopPropagation();
                 toggleFavorite(product.id);
             });
+            
+            // THÊM SỰ KIỆN: Click vào tên sản phẩm trên mobile để mở Shopee
+            const productNameElement = card.querySelector('.product-name');
+            const shopeeBtn = card.querySelector('.shopee-btn');
+            
+            // Kiểm tra nếu là mobile (màn hình <= 768px)
+            if (window.innerWidth <= 768) {
+                // Trên mobile: tên sản phẩm có thể click
+                productNameElement.style.cursor = 'pointer';
+                productNameElement.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    window.open(product.shopeeLink, '_blank');
+                });
+                
+                // Trên mobile: thay đổi màu tên sản phẩm để thể hiện có thể click
+                productNameElement.style.color = '#0066cc';
+                productNameElement.addEventListener('mouseenter', function() {
+                    this.style.textDecoration = 'underline';
+                });
+                productNameElement.addEventListener('mouseleave', function() {
+                    this.style.textDecoration = 'none';
+                });
+            } else {
+                // Trên desktop: tên sản phẩm không click, giữ nguyên màu
+                productNameElement.style.cursor = 'default';
+                productNameElement.style.color = '#333';
+            }
             
             return card;
         }
@@ -1205,7 +1810,7 @@
             }, 3000);
         }
 
-        // Filter and sort products
+        // Filter and sort products - CẬP NHẬT với sorting mới
         function filterAndSortProducts() {
             let filteredProducts = [...products];
             
@@ -1254,6 +1859,10 @@
                     filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
                     sortText = 'Tên: Z-A';
                     break;
+                case 'discount-desc':
+                    filteredProducts.sort((a, b) => (b.discount || 0) - (a.discount || 0));
+                    sortText = 'Giảm giá nhiều nhất';
+                    break;
                 default:
                     // Default sorting (by ID)
                     filteredProducts.sort((a, b) => a.id - b.id);
@@ -1268,6 +1877,16 @@
                 filterInfo.style.display = 'block';
             } else {
                 filterInfo.style.display = 'none';
+            }
+            
+            // Hide autocomplete when filtering
+            hideAutocomplete();
+            
+            // Đóng bộ lọc trên mobile sau khi áp dụng
+            if (window.innerWidth <= 768) {
+                isMobileFiltersOpen = false;
+                filterSortContainer.style.display = 'none';
+                mobileFilterToggle.innerHTML = '<i class="fas fa-sliders-h"></i> Bộ Lọc & Sắp Xếp';
             }
             
             // Update current filtered products
